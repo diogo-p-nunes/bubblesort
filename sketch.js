@@ -63,10 +63,14 @@ function swap(someArray, x, y) {
   someArray[y] = temp;
 }
 
-function drawArray(someArray) {
+function drawArrayStraight() {
+  scale(zoom, 1);
   for(var k = 0; k < arrSize; k++) {
     
-    if(k == j || k >= arrSize-i) {
+    if(k == j) {
+      stroke(255,0,0);
+    }
+    else if(k >= arrSize-i) {
       stroke(0,255,0);
     }
     else {
@@ -76,8 +80,33 @@ function drawArray(someArray) {
   }
 }
 
+
+function drawArrayCircular() {
+  scale(1,1);
+  var angle = (2*PI/ arrSize);
+  
+  for(var k = 0; k < arrSize; k++) {
+   
+    if(k == j) {
+      stroke(255,0,0);
+    }
+    else if(k >= arrSize-i) {
+      stroke(0,255,0);
+    }
+    else {
+      stroke(255,155,255);
+    }
+
+    angleMode(RADIANS);
+    var lenght = floor(map(height-arr[k], 0, height, 0, height/2));
+    var y = height/2 + lenght*sin(angle*k);
+    var x = width/2 + lenght*cos(angle*k);
+
+    line(width/2, height/2, x, y);
+  }
+}
+
 function draw() {
-  scale(zoom, 1);
   background(50);
   //frameRate(1);
 
@@ -92,8 +121,9 @@ function draw() {
   } 
 
   // draw new state
-  drawArray(arr);
-  
+  //drawArrayCircular();
+  drawArrayStraight();
+
   // stop if done
   if(i >= arrSize-1) {
     noLoop();
