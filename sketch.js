@@ -8,14 +8,13 @@ var arrSize;
 var zoom = 10;
 
 // sorting vars
-var swapped = true;
-var index = 0;
+var i = 0; j = 0;
 
 
 
 function setup() {
-  width = windowWidth;
-  height = windowHeight;
+  width = 600;
+  height = 400;
   createCanvas(width, height);
   background(50);
 
@@ -23,7 +22,7 @@ function setup() {
   
   //sort(arr);
   //bubblesort(arr);
-  bubblesortOptimized(arr);
+  //bubblesortOptimized(arr);
 }
 
 function initArray() {
@@ -64,13 +63,26 @@ function swap(someArray, x, y) {
 }
 
 function draw() {
-  scale(10, 1);
+  scale(zoom, 1);
   background(50);
-  frameRate(10);
+  //frameRate(25);
 
-  for(var i = 0; i < arrSize; i++) {
+  if(arr[j] > arr[j+1]) {
+    swap(arr, j, j+1);
+  }
+  j++;
+  if(j >= arrSize-i) {
+    j = 0;
+    i++;
+  }
+
+  for(var k = 0; k < arrSize; k++) {
     stroke(255, 155, 255);
-    line(i, height, i, height-arr[i]);
+    line(k, height, k, height-arr[k]);
+  }
+
+  if(i >= arrSize-1) {
+    noLoop();
   }
 
 }
