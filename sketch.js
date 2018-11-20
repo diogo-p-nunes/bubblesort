@@ -9,6 +9,7 @@ var zoom = 10;
 
 // sorting vars
 var swapped = true;
+var index = 0;
 
 
 
@@ -22,6 +23,7 @@ function setup() {
   
   //sort(arr);
   //bubblesort(arr);
+  bubblesortOptimized(arr);
 }
 
 function initArray() {
@@ -44,6 +46,17 @@ function bubblesort(someArray) {
   }
 }
 
+function bubblesortOptimized(someArray) {
+  for(var i = 0; i < arrSize-1; i++) {
+    for(var j = 0; j < arrSize-i; j++) {
+      if(someArray[j] > someArray[j+1]) {
+        swap(someArray, j, j+1);
+      }
+    }
+  }
+}
+
+
 function swap(someArray, x, y) {
   var temp = someArray[x];
   someArray[x] = someArray[y];
@@ -53,29 +66,11 @@ function swap(someArray, x, y) {
 function draw() {
   scale(10, 1);
   background(50);
-  frameRate(3);
+  frameRate(10);
 
-  // update
-  swapped = false;
-  var red = false;
-  for(var i = 0; i < arrSize-1; i++) {
-    if(arr[i] > arr[i+1]) {
-      swap(arr, i, i+1);
-      swapped = true;
-      red = true;
-    }
+  for(var i = 0; i < arrSize; i++) {
+    stroke(255, 155, 255);
+    line(i, height, i, height-arr[i]);
+  }
 
-    if(red) {
-      stroke(255, 0, 0);
-      line(i, height, i, height-arr[i]);
-      red = false;
-    }
-    else {
-      stroke(255, 155, 255);
-      line(i, height, i, height-arr[i]);
-    }
-  }
-  if(!swapped) {
-    noLoop();
-  }
 }
