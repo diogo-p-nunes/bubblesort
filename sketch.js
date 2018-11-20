@@ -8,6 +8,7 @@ var arrSize;
 var zoom = 10;
 
 // sorting vars
+var swapped = false;
 var i = 0; j = 0;
 
 
@@ -67,17 +68,26 @@ function draw() {
   background(50);
   //frameRate(25);
 
+  // update state
+  swapped = false;
   if(arr[j] > arr[j+1]) {
     swap(arr, j, j+1);
+    swapped = true;
   }
   j++;
   if(j >= arrSize-i) {
     j = 0;
     i++;
-  }
+  } 
 
+  // draw new state
   for(var k = 0; k < arrSize; k++) {
-    stroke(255, 155, 255);
+    if(k == j) {
+      stroke(255,0,0);
+    }
+    else {
+      stroke(255,155,255);
+    }
     line(k, height, k, height-arr[k]);
   }
 
