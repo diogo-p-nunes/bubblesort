@@ -12,6 +12,11 @@ function setup() {
   background(50);
 
   initArray();
+  
+  //sort(arr);
+
+  bubblesort(arr);
+  console.log(arr);
 }
 
 function initArray() {
@@ -21,12 +26,31 @@ function initArray() {
   }
 }
 
+function bubblesort(someArray) {
+  swapped = true;
+  while(swapped) {
+    swapped = false;
+    for(var i = 0; i < arrSize-1; i++) {
+      if(someArray[i] > someArray[i+1]) {
+        swap(someArray, i, i+1);
+        swapped = true; 
+      }
+    }
+  }
+}
+
+
+function swap(someArray, x, y) {
+  var temp = someArray[x];
+  someArray[x] = someArray[y];
+  someArray[y] = temp;
+}
 
 function draw() {
   scale(10, 1);
   background(50);
-  stroke(255, 255, 255);
+  stroke(255, 0, 0);
   for(var i=0; i < arrSize; i++) {
-    line(i, 0, i, arr[i]);
+    line(i, height, i, height-arr[i]);
   }
 }
