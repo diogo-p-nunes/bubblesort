@@ -63,16 +63,27 @@ function swap(someArray, x, y) {
   someArray[y] = temp;
 }
 
+function drawArray(someArray) {
+  for(var k = 0; k < arrSize; k++) {
+    
+    if(k == j || k >= arrSize-i) {
+      stroke(0,255,0);
+    }
+    else {
+      stroke(255,155,255);
+    }
+    line(k, height, k, height-arr[k]);
+  }
+}
+
 function draw() {
   scale(zoom, 1);
   background(50);
-  //frameRate(25);
+  //frameRate(1);
 
   // update state
-  swapped = false;
   if(arr[j] > arr[j+1]) {
     swap(arr, j, j+1);
-    swapped = true;
   }
   j++;
   if(j >= arrSize-i) {
@@ -81,16 +92,9 @@ function draw() {
   } 
 
   // draw new state
-  for(var k = 0; k < arrSize; k++) {
-    if(k == j) {
-      stroke(255,0,0);
-    }
-    else {
-      stroke(255,155,255);
-    }
-    line(k, height, k, height-arr[k]);
-  }
-
+  drawArray(arr);
+  
+  // stop if done
   if(i >= arrSize-1) {
     noLoop();
   }
